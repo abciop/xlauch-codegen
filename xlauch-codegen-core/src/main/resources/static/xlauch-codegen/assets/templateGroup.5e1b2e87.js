@@ -1,0 +1,1 @@
+import{s as t}from"./request.e0f9835c.js";const p=()=>t.get("/gen/templateGroup/list"),s=e=>e.id?t.put("/gen/templateGroup",e):t.post("/gen/templateGroup",e),o=e=>{if(e)return t.get("/gen/templateGroup/delete/"+e)};export{o as d,p as g,s};
