@@ -7,14 +7,14 @@
     <packaging>jar</packaging>
 
     <parent>
-        <groupId>com.xlauch</groupId>
+        <groupId>io.github.abciop</groupId>
         <artifactId>xlauch-codegen</artifactId>
         <version>1.0.1</version>
     </parent>
 
     <dependencies>
         <dependency>
-            <groupId>com.xlauch</groupId>
+            <groupId>io.github.abciop</groupId>
             <artifactId>xlauch-codegen-core</artifactId>
             <version>1.0.1</version>
         </dependency>

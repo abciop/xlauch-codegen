@@ -25,7 +25,7 @@
 <dependency>
     <groupId>com.xlauch</groupId>
     <artifactId>xlauch-codegen-boot-starter</artifactId>
-    <version>2.1.1</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 
