@@ -1,9 +1,12 @@
 ## 项目说明
 - xlauch-codegen是一款低代码生成器，基于maku-generator 进行改造，可根据自定义模板内容，快速生成代码，可实现项目的快速开发、上线，减少重复的代码编写，开发人员只需专注业务逻辑即可。
+
 - 增加了模板分组、在线模板修改等功能
-- 增加了项目管理，可以配置快速切换项目，方便多个项目开发代码生成
-- 开发文档：https://maku.net/docs/maku-generator
- 
+
+- 增加了项目管理，可以配置快速切换项目，方便多个项目开发代码生成 
+
+  
+
 
 ## 项目特点
 - 友好的代码结构及注释，便于阅读及二次开发
@@ -33,7 +36,7 @@
 ## 交流和反馈 
 - Gitee仓库：https://gitee.com/makunet/maku-generator
 - Github仓库：https://github.com/abciop/xlauch-codegen
- 
+
  
 
 ## 支持
@@ -77,4 +80,4 @@
 ![输入图片说明](images/11.png)
 
 ![输入图片说明](images/12.png)
- 
+
