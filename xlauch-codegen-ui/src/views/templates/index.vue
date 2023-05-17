@@ -29,7 +29,8 @@
           <el-button link type="primary" size="small" @click="onImportTemplates(group.id)">批量导入</el-button>
           <el-button link type="primary" size="small" @click="exportTemplate(group.id)">导出模板</el-button>
         </div>
-        <el-table :data="group.templateList" border style="width: 100%">
+        <el-table :data="group.templateList" border style="width: 100%" @selection-change="selectionChangeHandle">
+          <el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
           <el-table-column prop="simpleName" label="模板名称" width="180"></el-table-column>
           <el-table-column prop="templateName" label="文件名称" width="180"></el-table-column>
           <el-table-column prop="generatorPath" label="文件目录"></el-table-column>
@@ -129,7 +130,7 @@ function onImportTemplates(groupId) {
   console.log(groupId)
 }
 
-function uploadTemplates(target) {
+function uploadTemplates(target:any) {
   importLoading.value = true
   const file = target.file
   importFiles.push({
@@ -164,6 +165,11 @@ function uploadTemplates(target) {
 
 }
 
+
+// 多选
+const selectionChangeHandle = (selections: any[]) => {
+  state.dataListSelections = selections.map((item: any) => state.primaryKey && item[state.primaryKey])
+}
 
 /**
  * ++++++++++++++++++++++++++++++++++++++++++++++++
