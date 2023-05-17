@@ -1,0 +1,45 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+target
+unpackage
+rebel.xml
+
+
+# eclipse
+.settings/
+.classpath
+.project
+
+*.log
+
+# idea
+.idea/
+*.iml
+
+*velocity.log*
+
+.rebel.xml.bak
+
+
+.DS_Store
+node_modules/
+dist/
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/test/unit/coverage/
+/test/e2e/reports/
+selenium-debug.log
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
