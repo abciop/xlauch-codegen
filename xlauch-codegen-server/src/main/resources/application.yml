@@ -10,9 +10,9 @@ spring:
   datasource:
     # MySQL
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost/xlauch-codegen?useUnicode=true&useSSL=false&characterEncoding=utf-8&tinyInt1isBit=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://101.43.5.233:53306/xlauch-tadmin?useUnicode=true&useSSL=false&characterEncoding=utf-8&tinyInt1isBit=false&serverTimezone=Asia/Shanghai
     username: xlauch
-    password: 123456
+    password: Xlauch@root
     # Oracle
 #    driver-class-name: oracle.jdbc.OracleDriver
 #    url: jdbc:oracle:thin:@localhost:1521:xe
