@@ -24,6 +24,16 @@
 - 运行GeneratorApplication.java，则可启动项目
 - 项目访问路径：http://localhost:8088/xlauch-codegen/index.html
 
+## 二开说明
+- 进入前端项目xlauch-codegen-ui，执行pnpm install
+- 根据实际情况修改代码，执行build命令 
+- 把dist目录的内容拷贝到xlauch-codegen-core的静态目录，覆盖原有文件
+
+![输入图片说明](images/img.png)
+
+
+
+
 ## maven依赖引入
 ```xml
 <dependency>
