@@ -26,6 +26,7 @@
         </template>
         <div style="margin-bottom: 10px">
           <el-button link type="primary" size="small" @click="onAdd(group.id)">新增模板</el-button>
+          <el-button link type="primary" size="small" @click="deleteBatchHandle()">删除模板</el-button>
           <el-button link type="primary" size="small" @click="onImportTemplates(group.id)">批量导入</el-button>
           <el-button link type="primary" size="small" @click="exportTemplate(group.id)">导出模板</el-button>
         </div>
@@ -37,7 +38,7 @@
           <el-table-column fixed="right" width="180" label="操作">
             <template #default="{row}">
               <el-button link type="primary" size="small" @click="onEdit(row)">修改</el-button>
-              <el-button link type="primary" size="small" @click="onDelete(row.id)">删除</el-button>
+              <el-button link type="primary" size="small" @click="deleteBatchHandle(row.id)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -87,7 +88,7 @@ import {ElMessage, ElMessageBox} from 'element-plus'
 import Edit from './edit.vue'
 import service from "@/utils/request";
 
-const activeName = ref()
+const activeName = ref('')
 const state: IHooksOptions = reactive({
   dataListUrl: '/gen/templates/page',
   deleteUrl: '/gen/templates'
@@ -100,7 +101,7 @@ const editVisible = ref(false)
 // 上传
 const importDialogVisible = ref(false)
 const importLoading = ref(false)
-const importFiles = []
+const importFiles = ref([])
 const importGroupId = ref("") ;
 
 
@@ -122,7 +123,7 @@ const dataRules = ref({
  * 文件上传
  * ++++++++++++++++++++++++++++++++++++++++++++++++
  * **/
-function onImportTemplates(groupId) {
+function onImportTemplates(groupId:any) {
   importFiles.value = []
   importLoading.value = false
   importDialogVisible.value = true
@@ -168,7 +169,7 @@ function uploadTemplates(target:any) {
 
 // 多选
 const selectionChangeHandle = (selections: any[]) => {
-  state.dataListSelections = selections.map((item: any) => state.primaryKey && item[state.primaryKey])
+  state.dataListSelections = selections.map((item: any) => item["id"])
 }
 
 /**
@@ -211,20 +212,33 @@ function onImportDialogClosed() {
 /**
  * 删除模板
  */
-function onDelete(id: number) {
+const deleteBatchHandle = (key?: number | string) => {
+  let data: any[] = []
+  if (key) {
+    data = [key]
+  } else {
+    data = state.dataListSelections ? state.dataListSelections : []
+
+    if (data.length === 0) {
+      ElMessage.warning('请选择删除记录')
+      return
+    }
+  }
+
   ElMessageBox.confirm('确定进行删除操作?', '提示', {
     confirmButtonText: '确定',
     cancelButtonText: '取消',
     type: 'warning'
   })
       .then(() => {
-        deleteTemplate(id).then(() => {
-          ElMessage.success('删除成功')
-          getTmplatesGroupList()
-        })
+        if (state.deleteUrl) {
+          deleteTemplate(data).then(() => {
+            ElMessage.success('删除成功')
+            getTmplatesGroupList()
+          })
+        }
       })
-      .catch(() => {
-      })
+      .catch(() => {})
 }
 
 /**

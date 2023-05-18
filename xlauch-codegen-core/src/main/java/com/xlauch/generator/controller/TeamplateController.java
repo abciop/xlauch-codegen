@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -53,13 +54,13 @@ public class TeamplateController {
     /**
      * 删除模板
      *
-     * @param id
+     * @param ids
      * @return
      */
-    @GetMapping("delete/{id}")
+    @PostMapping("delete")
     @ResponseBody
-    public Result<String> delete(@PathVariable Long id) {
-        templateService.removeById(id);
+    public Result<String> delete(@RequestBody Long[] ids) {
+        templateService.removeBatchByIds(Arrays.asList(ids));
         return Result.ok();
     }
 

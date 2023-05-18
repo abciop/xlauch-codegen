@@ -11,9 +11,9 @@ export const saveTemplate = (dataForm: any) => {
 }
 
 // 删除模板
-export const deleteTemplate = (id: number) => {
-    if(id){
-        return service.get('/gen/template/delete/' + id)
+export const deleteTemplate = (ids: any[]) => {
+    if (ids) {
+        return service.post('/gen/template/delete', ids)
     }
 }
 
