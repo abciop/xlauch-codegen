@@ -27,7 +27,7 @@ import java.util.List;
  * @version 0.1
  * @since 2022/8/13 14:12
  */
-@Configuration("defaultFastjsonConfig")
+//@Configuration("defaultFastjsonConfig")
 @ConditionalOnClass(com.alibaba.fastjson.JSON.class)
 @ConditionalOnMissingBean(FastJsonHttpMessageConverter.class)
 @ConditionalOnWebApplication
