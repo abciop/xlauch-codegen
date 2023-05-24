@@ -1,0 +1,1 @@
+import{s as t}from"./request.7d80545a.js";const r=()=>t.get("/gen/templateGroup/list"),p=e=>e.id?t.put("/gen/templateGroup",e):t.post("/gen/templateGroup",e),s=e=>{if(e)return t.get("/gen/templateGroup/delete/"+e)},n=e=>{location.href="./gen/templateGroup/download?id="+e};export{n as a,s as d,r as g,p as s};
