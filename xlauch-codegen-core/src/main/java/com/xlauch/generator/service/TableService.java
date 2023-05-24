@@ -33,4 +33,11 @@ public interface TableService extends BaseService<TableEntity> {
      * @param id 表ID
      */
     void sync(Long id);
+
+    /**
+     * 修改
+     *
+     * @param table
+     */
+    void updateTable(TableEntity table);
 }

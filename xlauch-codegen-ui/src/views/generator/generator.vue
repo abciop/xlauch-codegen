@@ -82,11 +82,18 @@
         </el-col>
       </el-row>
       <el-divider></el-divider>
+
+      <el-form-item label="所属项目" prop="projectId">
+        <el-select v-model="dataForm.projectId" style="width: 100%" placeholder="请选择所属项目" @change="onProjectChange">
+          <el-option v-for="project in projectList" :key="project.id" :label="project.projectName"
+                     :value="project.id"></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item v-if="dataForm.generatorType === 1" label="后端生成路径" prop="backendPath">
-        <el-input v-model="dataForm.backendPath" placeholder="后端生成路径"></el-input>
+        <el-input v-model="dataForm.backendPath" disabled placeholder="后端生成路径"></el-input>
       </el-form-item>
       <el-form-item v-if="dataForm.generatorType === 1" label="前端生成路径" prop="frontendPath">
-        <el-input v-model="dataForm.frontendPath" placeholder="前端生成路径"></el-input>
+        <el-input v-model="dataForm.frontendPath" disabled placeholder="前端生成路径"></el-input>
       </el-form-item>
 
       <el-form-item label="模板分组" prop="groupId">
@@ -121,6 +128,7 @@ import {useBaseClassListApi} from '@/api/baseClass'
 import {useGeneratorApi, useDownloadApi, getGenerTemplates, useGeneratorApiWithTemplates} from '@/api/generator'
 import {useTableApi, useTableSubmitApi} from '@/api/table'
 import {getGroupList} from '@/api/templateGroup'
+import {getProjectList} from "@/api/project";
 
 const emit = defineEmits(['refreshDataList'])
 
@@ -132,6 +140,7 @@ const dataForm = reactive({
   baseclassId: '',
   generatorType: 0,
   formLayout: 1,
+  projectId:'',
   backendPath: '',
   frontendPath: '',
   packageName: '',
@@ -156,7 +165,8 @@ const groupList = ref<any[]>([])
 const templateList = ref<any[]>([])
 // 模板id集合
 const templateIdList = ref<any[]>([])
-
+// 项目列表
+const projectList = ref<any[]>([])
 
 /**
  * 初始化
@@ -174,6 +184,7 @@ const init = (id: number) => {
 
   getBaseClassList()
   getTable(id)
+  getProject()
 
 }
 
@@ -196,12 +207,37 @@ const getTable = (id: number) => {
   })
 }
 
+// 获取项目列表
+const getProject = () => {
+  getProjectList().then(res => {
+    projectList.value = res.data
+  })
+}
+
+
+/**
+ * 切换项目
+ */
+function onProjectChange(projectId: number){
+  for (let i in projectList.value) {
+    let project = projectList.value[i]
+    if (project.id == projectId) {
+      dataForm.backendPath = project.backendPath
+      dataForm.frontendPath = project.frontendPath
+      break
+    }
+  }
+}
+
 /**
  * 切换分组
  */
 function onGroupChange(groupId: number) {
   changeTemplateList(groupId)
 }
+
+
+
 
 /**
  * 根据分组id切换模板列表
@@ -258,6 +294,7 @@ const dataRules = ref({
   packageName: [{required: true, message: '必填项不能为空', trigger: 'blur'}],
   author: [{required: true, message: '必填项不能为空', trigger: 'blur'}],
   moduleName: [{required: true, message: '必填项不能为空', trigger: 'blur'}],
+  projectId: [{required: true, message: '必填项不能为空', trigger: 'blur'}],
   functionName: [{required: true, message: '必填项不能为空', trigger: 'blur'}],
   generatorType: [{required: true, message: '必填项不能为空', trigger: 'blur'}],
   checkTemplates: [{required: true, message: '必填项不能为空', trigger: 'blur'}],

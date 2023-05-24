@@ -94,6 +94,7 @@ public class TableServiceImpl extends BaseServiceImpl<TableDao, TableEntity> imp
         // 保存表信息
         table.setPackageName(project.getPackageName());
         table.setVersion(project.getVersion());
+        table.setProjectId(projectId);
         table.setBackendPath(project.getBackendPath());
         table.setFrontendPath(project.getFrontendPath());
         table.setAuthor(project.getAuthor());
@@ -170,5 +171,15 @@ public class TableServiceImpl extends BaseServiceImpl<TableDao, TableEntity> imp
             List<Long> fieldIds = delFieldList.stream().map(TableFieldEntity::getId).collect(Collectors.toList());
             tableFieldService.removeBatchByIds(fieldIds);
         }
+    }
+
+    @Override
+    public void updateTable(TableEntity table) {
+        // 项目信息
+        ProjectEntity project = projectService.getById(table.getProjectId());
+        table.setBackendPath(project.getBackendPath());
+        table.setFrontendPath(project.getFrontendPath());
+
+        updateById(table);
     }
 }

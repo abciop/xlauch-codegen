@@ -59,7 +59,7 @@ public class TableController {
      */
     @PutMapping
     public Result<String> update(@RequestBody TableEntity table) {
-        tableService.updateById(table);
+        tableService.updateTable(table);
 
         return Result.ok();
     }

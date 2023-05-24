@@ -52,6 +52,10 @@ public class TableEntity {
      */
     private Integer generatorType;
     /**
+     * 所属项目id
+     */
+    private Long projectId;
+    /**
      * 后端生成路径
      */
     private String backendPath;
